@@ -3,6 +3,7 @@ package com.example.executandovideo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -16,6 +17,17 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         videoView = findViewById(R.id.videoView);
+
+        // Esconde a statusBar e barra de navegação e colocar no modo fullscreen.
+        View decorView = getWindow().getDecorView();
+
+        // Ocultando componentes
+        //int uiOpcoes = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        int uiOpcoes = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOpcoes);
+
+        // Esconder o ActionBar
+        getSupportActionBar().hide();
 
         // Configura os controladores
         videoView.setMediaController(new MediaController(this));
@@ -44,5 +56,20 @@ public class PlayerActivity extends AppCompatActivity {
         Por fim colocar no nome do nosso vídeo, que define que o vídeo está dentro do raw: R.raw.video
 
     3º startizar o vídeo
+
+    Colocando em modo fullScreen e esconder a ActionBar para melhor visualização.
+
+    1º Adicionado um ScreenOrientation no AndroidManifest.xml
+    <activity android:name=".PlayerActivity" android:screenOrientation="landscape"></activity>
+
+    2º Para esconder o ActionBar vamos utilizar os métodos:
+     getSupportActionBar().hide();
+
+    3º Acessando em fullScreen no momento que muda a orientação para landscape. Vamos utilizar um decorView
+    que permite recuperar o objeto permitindo fazer configurações (getDecorView()) na tela (getWindow()).
+
+    Depois podemos esconder o componente a partir da View da seguinte maneira:
+    int uiOpcoes = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+
 
     * */
